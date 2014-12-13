@@ -1,11 +1,3 @@
-char* message[] = {
-  "one", "two", "three", "four", 
-  "five", "six", "seven", "eight", 
-  "nine", "ten", "eleven", "twelve"
-};
-
-//int buttonDown = 0;
-
 void performAction(int index)
 {
   switch(index){
@@ -20,36 +12,44 @@ void performAction(int index)
     Keyboard.set_key1(KEY_C);
     break;
     case 3:
-    
+    Keyboard.set_modifier(MODIFIERKEY_ALT);
+    Keyboard.set_key1(KEY_F4);
     break;
     case 4:
-    
+    Keyboard.set_modifier(MODIFIERKEY_CTRL);
+    Keyboard.set_modifier(MODIFIERKEY_SHIFT);
+    Keyboard.set_key1(KEY_ESC);
     break;
     case 5:
-    
+    Keyboard.set_modifier(MODIFIERKEY_CTRL);
+    Keyboard.set_modifier(MODIFIERKEY_ALT);
+    Keyboard.set_key1(KEY_DELETE);
     break;
     case 6:
-    
+    Keyboard.set_modifier(MODIFIERKEY_CTRL);
+    Keyboard.set_key1(KEY_A);
     break;
     case 7:
-    
+    Keyboard.set_key1(KEY_ESC);
     break;
     case 8:
-    
+    Keyboard.set_key1(KEY_DELETE);
     break;
     case 9:
-    
+    Keyboard.set_key1(KEY_SPACE);
     break;
     case 10:
-    
+    Keyboard.set_key1(KEY_Y);
     break;
     case 11:
-    
-    break;
-    case 12:
-    
+    Keyboard.set_key1(KEY_N);
     break;
   }
+  Keyboard.send_now();
+  
+  Keyboard.set_modifier(0);
+  Keyboard.set_key1(0);
+  Keyboard.send_now();
 }
 void setup() {
   Serial.begin(9600);
@@ -61,7 +61,6 @@ void setup() {
 }
 
 void loop() {
-  char* str;
   for (int x=0; x<12; ++x)
   {
     if (digitalRead(x) == LOW) 
@@ -72,5 +71,3 @@ void loop() {
   }
   delay(10);
 }
-
-
