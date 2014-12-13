@@ -16,13 +16,11 @@ void performAction(int index)
     Keyboard.set_key1(KEY_F4);
     break;
     case 4:
-    Keyboard.set_modifier(MODIFIERKEY_CTRL);
-    Keyboard.set_modifier(MODIFIERKEY_SHIFT);
+    Keyboard.set_modifier(MODIFIERKEY_CTRL|MODIFIERKEY_SHIFT);
     Keyboard.set_key1(KEY_ESC);
     break;
     case 5:
-    Keyboard.set_modifier(MODIFIERKEY_CTRL);
-    Keyboard.set_modifier(MODIFIERKEY_ALT);
+    Keyboard.set_modifier(MODIFIERKEY_CTRL|MODIFIERKEY_ALT);
     Keyboard.set_key1(KEY_DELETE);
     break;
     case 6:
