@@ -19,7 +19,7 @@ void performAction(int index)
 }
 void setup() {
   Serial.begin(9600);
-  for(int x=0; x<12; ++x)
+  for(int x=0; x<2; ++x)
   {
     pinMode(x, INPUT_PULLUP);
   }
@@ -27,7 +27,7 @@ void setup() {
 }
 
 void loop() {
-  for (int x=0; x<12; ++x)
+  for (int x=0; x<2; ++x)
   {
     if (digitalRead(x) == LOW) 
     {
