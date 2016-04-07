@@ -1,3 +1,6 @@
+#define GREEN_BUTTON 1
+#define STOPPER 0
+
 void performAction(int index)
 {
   switch(index){
@@ -26,14 +29,42 @@ void setup() {
   delay(500);
 }
 
+int latches[2] = {0,0};
+int actions[2] = {0,0};
 void loop() {
-  for (int x=0; x<2; ++x)
+
+  if(digitalRead(STOPPER) != LOW)
   {
-    if (digitalRead(x) == LOW) 
-    {
-      performAction(x);
-      delay(400);
-    }
+    if(!latches[STOPPER])
+      actions[STOPPER] = 1;
+    latches[STOPPER] = 1;
   }
+  else
+  {
+    latches[STOPPER] = 0;
+  }
+  if(digitalRead(GREEN_BUTTON) == LOW)
+  {
+    if(!latches[GREEN_BUTTON])
+      actions[GREEN_BUTTON] = 1;
+    latches[GREEN_BUTTON] = 1;
+  }
+  else
+  {
+    latches[GREEN_BUTTON] = 0; 
+  }
+
+  for(int x=0; x< 2; ++x)
+  {
+    if(actions[x])
+    {
+      actions[x] = 0;
+      if(x == GREEN_BUTTON && latches[STOPPER])
+      {
+        continue;
+      }
+      performAction(x);
+    }
+  }  
   delay(10);
 }
