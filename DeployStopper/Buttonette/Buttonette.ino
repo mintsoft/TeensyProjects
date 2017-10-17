@@ -6,11 +6,11 @@ void performAction(int index)
   switch(index){
     case 0:
       Keyboard.set_modifier(MODIFIERKEY_ALT|MODIFIERKEY_CTRL|MODIFIERKEY_SHIFT);
-      Keyboard.set_key1(KEY_END);
+      Keyboard.set_key1(KEYPAD_3);
     break;
     case 1:
       Keyboard.set_modifier(MODIFIERKEY_ALT|MODIFIERKEY_CTRL|MODIFIERKEY_SHIFT);
-      Keyboard.set_key1(KEY_INSERT);
+      Keyboard.set_key1(KEYPAD_9);
     break;
     default:
       return;
