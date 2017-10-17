@@ -5,12 +5,12 @@ void performAction(int index)
 {
   switch(index){
     case 0:
-      Keyboard.set_modifier(MODIFIERKEY_ALT|MODIFIERKEY_CTRL|MODIFIERKEY_SHIFT);
-      Keyboard.set_key1(KEYPAD_3);
+      Keyboard.set_modifier(MODIFIERKEY_ALT | MODIFIERKEY_CTRL | MODIFIERKEY_SHIFT | MODIFIERKEY_RIGHT_GUI);
+      Keyboard.set_key1(KEYPAD_PLUS);
     break;
     case 1:
-      Keyboard.set_modifier(MODIFIERKEY_ALT|MODIFIERKEY_CTRL|MODIFIERKEY_SHIFT);
-      Keyboard.set_key1(KEYPAD_9);
+      Keyboard.set_modifier(MODIFIERKEY_ALT | MODIFIERKEY_CTRL | MODIFIERKEY_SHIFT | MODIFIERKEY_RIGHT_GUI);
+      Keyboard.set_key1(KEYPAD_MINUS);
     break;
     default:
       return;
