@@ -7,6 +7,7 @@ void setup() {
   Serial.println(F("RawHID Example"));
   for (int i=0; i<7; i++) {
     pinMode(i, OUTPUT);
+    digitalWrite(i, HIGH);
   }
 }
 
