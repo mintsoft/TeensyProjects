@@ -1,7 +1,7 @@
 #define ASCII_DIGIT_OFFSET 0x30;
-#define RED_PIN 10
-#define GREEN_PIN 11
-#define BLUE_PIN 9
+#define RED_PIN 9
+#define GREEN_PIN 10
+#define BLUE_PIN 11
 
 char buffer[255];
 
