@@ -33,7 +33,7 @@ void loop() {
     buffer[y] = received_char;
     y = y+1%255;
     
-    if(received_char != '\n')
+    if(received_char != '\n' && received_char != ';')
       continue;
 
     Serial.print("buffer: '");
