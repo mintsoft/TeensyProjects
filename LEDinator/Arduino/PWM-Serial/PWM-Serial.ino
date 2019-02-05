@@ -1,7 +1,7 @@
 #define ASCII_DIGIT_OFFSET 0x30;
-#define RED_PIN 11
-#define GREEN_PIN 12
-#define BLUE_PIN 13
+#define RED_PIN 10
+#define GREEN_PIN 11
+#define BLUE_PIN 9
 
 char buffer[255];
 
@@ -12,9 +12,8 @@ int green;
 
 void setup() {
   Serial.begin(115200);
-  for (int i=0; i<10; i++) {
+  for (int i=9; i<12; i++) {
     pinMode(i, OUTPUT);
-    digitalWrite(i, HIGH);
   }
   y = 0;
   red = 0;
@@ -29,13 +28,17 @@ void loop() {
   char received_char;
   while( Serial.available() > 0 ) {
     received_char = Serial.read();
-    
+    Serial.print("Received: ");
+    Serial.println(received_char);
     buffer[y] = received_char;
     y = y+1%255;
     
     if(received_char != '\n')
       continue;
-   
+
+    Serial.print("buffer: '");
+    Serial.print(buffer);
+    Serial.println("'");
     sscanf(buffer, "%d %d %d", &red, &green, &blue);
 
     y=0;
