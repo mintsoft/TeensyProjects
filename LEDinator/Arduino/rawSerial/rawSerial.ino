@@ -4,7 +4,7 @@ char buffer[255];
 int y;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200);
   for (int i=0; i<10; i++) {
     pinMode(i, OUTPUT);
     digitalWrite(i, HIGH);
