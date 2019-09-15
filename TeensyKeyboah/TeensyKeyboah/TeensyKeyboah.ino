@@ -1,6 +1,7 @@
 #include <EEPROM.h>
 
 #define MAXPIN 16
+#define EEPROM_KEYSAVE_OFFSET 8
 
 byte myKeysToPress[MAXPIN];
 bool keyIsUp[MAXPIN];
@@ -35,6 +36,29 @@ void loop()
       keyIsUp[x] = true;
     }
   }
+  
+  byte inputBuffer[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  unsigned int byteIndex = 0;
+  while (Serial.available() && byteIndex < (sizeof(inputBuffer)/sizeof(inputBuffer[0])))
+  {
+    inputBuffer[byteIndex++] = Serial.read();
+  }
+
+  if(inputBuffer[31] != 127)
+    return;
+  
+  if( strncmp("SET ", (char*)inputBuffer,4) == 0 )
+  {
+      for(int offset=0; offset < MAXPIN; ++offset)
+      {
+        myKeysToPress[offset] = inputBuffer[offset+4];
+      }
+  } 
+  else if (strncmp("SAVE", (char*)inputBuffer,4) == 0) 
+  {
+    saveSettingsToEEPROM();
+  }
+  
 }
 
 void triggerKeyboardMacro(int keyIndex)
@@ -55,7 +79,7 @@ void initialiseEEPROM()
     EEPROM.write(127, 255);
     for(int x=0; x < MAXPIN; ++x)
     {
-      EEPROM.write(8 + x, (byte)KEY_SPACE);
+      EEPROM.write(EEPROM_KEYSAVE_OFFSET + x, (byte)KEY_SPACE);
     }
   }
 }
@@ -64,7 +88,15 @@ void loadSettingsFromEEPROM()
 {
   for(int x=0; x < MAXPIN; ++x)
   {
-    myKeysToPress[x] = EEPROM.read(8 + x);
+    myKeysToPress[x] = EEPROM.read(EEPROM_KEYSAVE_OFFSET + x);
+  }
+}
+
+void saveSettingsToEEPROM()
+{
+  for(int x=0; x < MAXPIN; ++x)
+  {
+     EEPROM.write(EEPROM_KEYSAVE_OFFSET + x, myKeysToPress[x]);
   }
 }
 
